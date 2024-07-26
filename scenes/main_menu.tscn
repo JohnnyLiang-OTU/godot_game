@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cojjrgugx4wsw"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_pnufa"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_pnufa")
+
+[node name="Button_Vbox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 990.0
+offset_top = 278.0
+offset_right = 1098.0
+offset_bottom = 328.0
+
+[node name="Play" type="Button" parent="Button_Vbox"]
+layout_mode = 2
+text = "Play"
+
+[node name="Exit" type="Button" parent="Button_Vbox"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Button_Vbox/Play" to="." method="_on_play_pressed"]
