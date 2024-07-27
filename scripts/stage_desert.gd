@@ -7,7 +7,7 @@ var missclick_count = 0
 @onready var player_node = $player
 
 func _ready():
-	player_node.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	player_node.connect("animation_finished", Callable(self, "_on_player_viz_animation_finished"))
 	
 	randomize()
 	generate_arrow_sequence()

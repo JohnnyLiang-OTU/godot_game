@@ -1,0 +1,117 @@
+[gd_scene load_steps=18 format=3 uid="uid://1xug7odpt837"]
+
+[ext_resource type="PackedScene" uid="uid://bfsx5mrvxwjhe" path="res://scenes/components/health_component.tscn" id="1_b4omy"]
+[ext_resource type="Script" path="res://scripts/components/player.gd" id="1_tlkg2"]
+[ext_resource type="Texture2D" uid="uid://byp1as6ncmg6c" path="res://assets/creatures/Soldier/Soldier-Attack01.png" id="2_i78fd"]
+[ext_resource type="Texture2D" uid="uid://cavu2r031xw6b" path="res://assets/creatures/Soldier/Soldier-Idle.png" id="3_t8dpp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6208n"]
+atlas = ExtResource("2_i78fd")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpato"]
+atlas = ExtResource("2_i78fd")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33qlh"]
+atlas = ExtResource("2_i78fd")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2ql7"]
+atlas = ExtResource("2_i78fd")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e5fa"]
+atlas = ExtResource("2_i78fd")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmnpd"]
+atlas = ExtResource("2_i78fd")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea0rm"]
+atlas = ExtResource("3_t8dpp")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hq4l"]
+atlas = ExtResource("3_t8dpp")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryrql"]
+atlas = ExtResource("3_t8dpp")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2u2v"]
+atlas = ExtResource("3_t8dpp")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y38n"]
+atlas = ExtResource("3_t8dpp")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehj44"]
+atlas = ExtResource("3_t8dpp")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1dmc3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6208n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpato")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33qlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2ql7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e5fa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmnpd")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea0rm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hq4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryrql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2u2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y38n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehj44")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_tlkg2")
+
+[node name="Health_Component" parent="." instance=ExtResource("1_b4omy")]
+
+[node name="player_viz" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7.62939e-06)
+scale = Vector2(11, 11)
+sprite_frames = SubResource("SpriteFrames_1dmc3")
+animation = &"idle"
+autoplay = "idle"
+
+[connection signal="animation_finished" from="player_viz" to="." method="_on_player_viz_animation_finished"]
