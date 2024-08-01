@@ -1,21 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxgdqtenx6dn"]
+[gd_scene load_steps=5 format=3 uid="uid://bqxgdqtenx6dn"]
 
 [ext_resource type="Script" path="res://scripts/generic_stage.gd" id="1_ukguj"]
 [ext_resource type="PackedScene" uid="uid://1xug7odpt837" path="res://scenes/player.tscn" id="2_mhklr"]
 [ext_resource type="PackedScene" uid="uid://bbhsqok7mly1j" path="res://scenes/monster.tscn" id="3_mpj4q"]
+[ext_resource type="PackedScene" uid="uid://bq2yb7posoerf" path="res://scenes/choice_menu.tscn" id="4_xo3sf"]
 
 [node name="generic_stage" type="Node2D"]
 script = ExtResource("1_ukguj")
 
+[node name="choice_menu" parent="." instance=ExtResource("4_xo3sf")]
+visible = false
+offset_left = 17.0
+offset_top = 458.0
+offset_right = 18.512
+offset_bottom = 458.0
+
 [node name="player" parent="." instance=ExtResource("2_mhklr")]
-position = Vector2(156, 371)
+position = Vector2(73, 215)
 
 [node name="monster" parent="." instance=ExtResource("3_mpj4q")]
-position = Vector2(1051, 371)
+position = Vector2(844, 215)
 
 [node name="sequence_container" type="HBoxContainer" parent="."]
+visible = false
 offset_left = 73.0
 offset_top = 36.0
 offset_right = 1093.0
 offset_bottom = 142.0
 metadata/_edit_use_anchors_ = true
+
+[connection signal="choice_to_player" from="." to="player" method="receive_choice"]
+[connection signal="on_choice" from="choice_menu" to="." method="_on_choice_menu_on_choice"]
+[connection signal="visibility_changed" from="choice_menu" to="choice_menu" method="_on_visibility_changed"]
+[connection signal="end_turn" from="player" to="." method="_on_player_end_turn"]
+[connection signal="user_turn" from="player" to="." method="_on_player_user_turn"]

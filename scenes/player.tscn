@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://1xug7odpt837"]
+[gd_scene load_steps=24 format=3 uid="uid://1xug7odpt837"]
 
 [ext_resource type="PackedScene" uid="uid://bfsx5mrvxwjhe" path="res://scenes/components/health_component.tscn" id="1_b4omy"]
 [ext_resource type="Script" path="res://scripts/components/player.gd" id="1_tlkg2"]
 [ext_resource type="Texture2D" uid="uid://byp1as6ncmg6c" path="res://assets/creatures/Soldier/Soldier-Attack01.png" id="2_i78fd"]
 [ext_resource type="Texture2D" uid="uid://cavu2r031xw6b" path="res://assets/creatures/Soldier/Soldier-Idle.png" id="3_t8dpp"]
+[ext_resource type="Texture2D" uid="uid://bhwnfe7u7rh2v" path="res://assets/creatures/Soldier/Soldier-Hurt.png" id="4_oihdt"]
+[ext_resource type="Script" path="res://scripts/Label.gd" id="6_m3s1f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6208n"]
 atlas = ExtResource("2_i78fd")
@@ -28,6 +30,22 @@ region = Rect2(400, 0, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pmnpd"]
 atlas = ExtResource("2_i78fd")
 region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nftxs"]
+atlas = ExtResource("4_oihdt")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls6rb"]
+atlas = ExtResource("4_oihdt")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03w0g"]
+atlas = ExtResource("4_oihdt")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjmhb"]
+atlas = ExtResource("4_oihdt")
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ea0rm"]
 atlas = ExtResource("3_t8dpp")
@@ -80,6 +98,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_nftxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls6rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03w0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjmhb")
+}],
+"loop": false,
+"name": &"defend",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ea0rm")
 }, {
 "duration": 1.0,
@@ -108,10 +143,20 @@ script = ExtResource("1_tlkg2")
 [node name="Health_Component" parent="." instance=ExtResource("1_b4omy")]
 
 [node name="player_viz" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -7.62939e-06)
+position = Vector2(120, 128)
 scale = Vector2(11, 11)
 sprite_frames = SubResource("SpriteFrames_1dmc3")
-animation = &"idle"
+animation = &"defend"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
+
+[node name="Label" type="Label" parent="." node_paths=PackedStringArray("health_component")]
+offset_left = 60.0
+offset_top = 221.0
+offset_right = 151.0
+offset_bottom = 248.0
+script = ExtResource("6_m3s1f")
+health_component = NodePath("../Health_Component")
 
 [connection signal="animation_finished" from="player_viz" to="." method="_on_player_viz_animation_finished"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-var hp_component : Node2D = null
+@export var hp_component : Node2D
 var viz_component : AnimatedSprite2D = null
 
 var mana = 50
@@ -12,9 +12,8 @@ var attack = 11
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hp_component = get_node("Health_Component")
 	viz_component = get_node("monster_viz")
-	viz_component.connect("animation_finished", Callable(self, "_on_monster_viz_animation_finished"))
+	#viz_component.connect("animation_finished", Callable(self, "_on_monster_viz_animation_finished"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,6 +1,8 @@
 extends Node2D
 
-var max_health = 10
+signal hp_change
+
+var max_health = 100
 var hp
 
 # Called when the node enters the scene tree for the first time.
@@ -12,6 +14,7 @@ func _ready():
 
 func take_damage(damage):
 	hp -= damage
+	hp_change.emit()
 	if(hp <= 0):
 		die()
 
@@ -22,4 +25,5 @@ func set_health(health):
 	hp = health
 
 func die():
-	queue_free()
+	print("die")
+	#queue_free()

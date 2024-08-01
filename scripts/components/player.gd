@@ -1,4 +1,8 @@
 extends Node2D
+# Enough action points to act (Is the user's turn)
+signal user_turn()
+# User's turn is over (Signal to continue the game logic)
+signal end_turn()
 
 var hp_component: Node2D = null
 var viz_component: AnimatedSprite2D = null
@@ -14,7 +18,7 @@ var attack = 10
 func _ready():
 	hp_component = get_node("Health_Component")
 	viz_component = get_node("player_viz")
-	viz_component.connect("animation_finished", Callable(self, "_on_player_viz_animation_finished"))
+	#viz_component.connect("animation_finished", Callable(self, "_on_player_viz_animation_finished"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,20 +27,20 @@ func _process(delta):
 func accumulate_action_points(delta):
 	action_points += speed * delta
 	if action_points >= action_threshold:
-		pause_timer()
-		perform_action()
+		user_turn.emit()
 		action_points -= action_threshold
 
-func perform_action():
-	viz_component.play("attack")
-
-func pause_timer():
-	get_parent().halt_action = true
-	
-func resume_timer():
-	get_parent().halt_action = false
-
 func _on_player_viz_animation_finished():
-	if viz_component.animation == "attack":
-		viz_component.play("idle")
-		resume_timer()
+	viz_component.play("idle")
+	end_turn.emit()
+
+func receive_choice(choice):
+	match choice:
+		1:
+			viz_component.play("attack")
+		2: 
+			viz_component.play("defend")
+		3: 
+			end_turn.emit()
+		_:
+			pass

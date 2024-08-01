@@ -1,0 +1,23 @@
+Last Stop:
+- After enough action points are taken, a choice menu will popup. 
+
+Todo:
+1. 
+- If choice is attack
+	Calculate attack number
+	Deduct action points
+	Play attack animation -> Send signal for animation done.
+
+- If choice is defend
+	Apply defend stat
+	Deduct action points
+	Play defend animation -> Send signal for animation done.
+	
+- If skills. Open skills menu, change focus to skills menu, interact with skills menu.
+	When a skill is entered
+	Handle skill
+	Play skill animation -> Send signal for animation done.
+
+
+- IF entered is not attack, defend, skills menu, or a skill. Do nothing. (Currently a bug in which focus goes outside of vsplit_container)
+- Else. Do nothing. (Currently a bug in which focus goes outside of vsplit_container)

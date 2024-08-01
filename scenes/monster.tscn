@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbhsqok7mly1j"]
+[gd_scene load_steps=19 format=3 uid="uid://bbhsqok7mly1j"]
 
 [ext_resource type="Script" path="res://scripts/components/monster.gd" id="1_dsf7o"]
 [ext_resource type="PackedScene" uid="uid://bfsx5mrvxwjhe" path="res://scenes/components/health_component.tscn" id="2_nw6v3"]
 [ext_resource type="Texture2D" uid="uid://q18h1a07m7vh" path="res://assets/creatures/Orc/Orc-Attack01.png" id="3_3y6pn"]
 [ext_resource type="Texture2D" uid="uid://c8a63xqa223qr" path="res://assets/creatures/Orc/Orc-Idle.png" id="3_jmclx"]
+[ext_resource type="Script" path="res://scripts/Label.gd" id="5_l30p2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qq51k"]
 atlas = ExtResource("3_3y6pn")
@@ -102,17 +103,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="monster" type="Node2D"]
+[node name="monster" type="Node2D" node_paths=PackedStringArray("hp_component")]
 script = ExtResource("1_dsf7o")
+hp_component = NodePath("Health_Component")
 
 [node name="Health_Component" parent="." instance=ExtResource("2_nw6v3")]
 
 [node name="monster_viz" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.000183105, -9.15527e-05)
+position = Vector2(184, 98)
 scale = Vector2(11, 11)
 sprite_frames = SubResource("SpriteFrames_5nca1")
 animation = &"attack"
 autoplay = "idle"
 flip_h = true
 
+[node name="Label" type="Label" parent="." node_paths=PackedStringArray("health_component")]
+offset_left = 132.0
+offset_top = 191.0
+offset_right = 225.0
+offset_bottom = 220.0
+script = ExtResource("5_l30p2")
+health_component = NodePath("../Health_Component")
+
+[connection signal="hp_change" from="Health_Component" to="Label" method="_on_health_component_hp_change"]
 [connection signal="animation_finished" from="monster_viz" to="." method="_on_monster_viz_animation_finished"]
