@@ -103,9 +103,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="monster" type="Node2D" node_paths=PackedStringArray("hp_component")]
+[node name="monster" type="Node2D" node_paths=PackedStringArray("hp_component", "viz_component")]
 script = ExtResource("1_dsf7o")
 hp_component = NodePath("Health_Component")
+viz_component = NodePath("monster_viz")
 
 [node name="Health_Component" parent="." instance=ExtResource("2_nw6v3")]
 

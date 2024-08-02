@@ -3,21 +3,25 @@ Last Stop:
 
 Todo:
 1. 
-- If choice is attack
-	Calculate attack number
-	Deduct action points
-	Play attack animation -> Send signal for animation done.
+- If choice is attack 			DONE
+	Calculate attack number 	DONE
+	Deduct action points 		DONE
+	Play attack animation -> Send signal for animation done. 	DONE
 
-- If choice is defend
-	Apply defend stat
-	Deduct action points
-	Play defend animation -> Send signal for animation done.
+- If choice is defend			DONE (can signal defend choice)
+	Apply defend stat			
+	Deduct action points		DONE
+	Play defend animation -> Send signal for animation done. 	DONE
 	
 - If skills. Open skills menu, change focus to skills menu, interact with skills menu.
 	When a skill is entered
 	Handle skill
 	Play skill animation -> Send signal for animation done.
 
+2.
+- I'm thinking of making the HP component into a Stats components to handle the changes for all stats.
+- For easier access to all other stats. This also allows me to generic(allize) some stuff.
 
-- IF entered is not attack, defend, skills menu, or a skill. Do nothing. (Currently a bug in which focus goes outside of vsplit_container)
-- Else. Do nothing. (Currently a bug in which focus goes outside of vsplit_container)
+3.
+- I'm planning to have all skills in a json or csv.
+- This way it is accesible for any scenario through a single file.

@@ -19,7 +19,7 @@ offset_bottom = 458.0
 position = Vector2(73, 215)
 
 [node name="monster" parent="." instance=ExtResource("3_mpj4q")]
-position = Vector2(844, 215)
+position = Vector2(788, 236)
 
 [node name="sequence_container" type="HBoxContainer" parent="."]
 visible = false
@@ -34,3 +34,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="visibility_changed" from="choice_menu" to="choice_menu" method="_on_visibility_changed"]
 [connection signal="end_turn" from="player" to="." method="_on_player_end_turn"]
 [connection signal="user_turn" from="player" to="." method="_on_player_user_turn"]
+[connection signal="monster_turn" from="monster" to="." method="_on_monster_monster_turn"]
+[connection signal="monster_turn_over" from="monster" to="." method="_on_monster_monster_turn_over"]

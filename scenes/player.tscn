@@ -137,8 +137,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="player" type="Node2D"]
+[node name="player" type="Node2D" node_paths=PackedStringArray("hp_component", "viz_component")]
 script = ExtResource("1_tlkg2")
+hp_component = NodePath("Health_Component")
+viz_component = NodePath("player_viz")
 
 [node name="Health_Component" parent="." instance=ExtResource("1_b4omy")]
 
@@ -159,4 +161,5 @@ offset_bottom = 248.0
 script = ExtResource("6_m3s1f")
 health_component = NodePath("../Health_Component")
 
+[connection signal="hp_change" from="Health_Component" to="Label" method="_on_health_component_hp_change"]
 [connection signal="animation_finished" from="player_viz" to="." method="_on_player_viz_animation_finished"]
